@@ -26,9 +26,10 @@ themselves. Some applications fork() but do not exec(), eg, for worker
 processes, which won't be included in the execsnoop output.
 
 
-The -x option can be used to include failed exec()s. For example:
+The -x option can be used to include failed exec()s. This option only works using
+the kprobe-based instrumentation.  So, you must also specify --kprobe. For example:
 
-# ./execsnoop -x
+# ./execsnoop -x --kprobe
 PCOMM            PID    RET ARGS
 supervise        9660     0 ./run
 supervise        9661     0 ./run
@@ -134,7 +135,7 @@ optional arguments:
 
 examples:
     ./execsnoop           # trace all exec() syscalls
-    ./execsnoop -x        # include failed exec()s
+    ./execsnoop -x        # include failed exec()s (only works with kprobe)
     ./execsnoop -T        # include time (HH:MM:SS)
     ./execsnoop -U        # include UID
     ./execsnoop -u 1000   # only trace UID 1000

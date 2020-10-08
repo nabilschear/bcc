@@ -159,6 +159,10 @@ class SmokeTests(TestCase):
         self.run_with_int("drsnoop.py")
 
     @skipUnless(kernel_version_ge(4,8), "requires kernel >= 4.8")
+    def test_execsnoop_kprobe(self):
+        self.run_with_int("execsnoop.py --kprobe")
+
+    @skipUnless(kernel_version_ge(4,19), "requires kernel >= 4.19")
     def test_execsnoop(self):
         self.run_with_int("execsnoop.py")
 
